@@ -1,0 +1,72 @@
+openapi: 3.0.3
+info:
+  version: 1.0.0
+  title: AppSegreteriaStudenti
+  description: Demo API realized with OpenAPI
+servers:
+  - url: http://localhost:8080/
+tags:
+  - name: students
+    description: Operations between student data
+paths:
+  /keepalive:
+    get:
+      tags:
+        - students
+      summary: Student Keepalive
+      description: Keepalive route for the account com.segreteria.claudiobianco.openapidemo.controller
+      operationId: keepAlive
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: string
+  /:
+    get:
+      tags:
+        - students
+      summary: Retrieve students data
+      description: Get all the student objects
+      operationId: getStudents
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Students'
+        404:
+          description: No data found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BaseError'
+components:
+  schemas:
+    Student:
+      type: object
+      properties:
+        nome:
+          type: string
+        cognome:
+          type: string
+        dataNascita:
+          type: string
+        codiceFiscale:
+          type: string
+        numeroMatricola:
+          type: string
+    Students:
+      type: array
+      items:
+        $ref: "#/components/schemas/Student"
+    BaseError:
+      type: object
+      required:
+        - code
+      properties:
+        code:
+          type: integer
+          format: int32
