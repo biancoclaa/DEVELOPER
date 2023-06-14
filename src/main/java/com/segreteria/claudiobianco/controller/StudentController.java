@@ -51,6 +51,6 @@ public class StudentController implements StudentsApi {
 
     @Override
     public ResponseEntity<String> keepAlive() {
-        return null;
+        return new ResponseEntity<>("I'm aLive", HttpStatus.OK);
     }
 }
